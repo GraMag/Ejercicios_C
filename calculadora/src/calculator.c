@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 #include "calculator.h"
 
 
@@ -81,15 +80,7 @@ int multiply (int num1, int num2) {
 
 float divide (int num1, int num2) {
 
-	float result;
-
-	if (num2 != 0) {
-		result = (float) num1 / num2;
-	} else {
-		result = 0;
-	}
-
-	return result;
+	return (float) num1 / num2;;
 }
 
 
@@ -101,20 +92,13 @@ float divide (int num1, int num2) {
 
 int factorial (int num) {
 
-	int i;
 	int fact;
+	int i;
+	fact = 1;
 
-	if (num >= 0)
-	{
-		fact = 1;
-		for (i = 1; i <= num; ++i) {
+	for (i = 1; i <= num; ++i) {
 			fact =  fact * i;
 		}
-	}
-	else
-	{
-		fact = 0;
-	}
 
 	return fact;
 }
@@ -128,39 +112,35 @@ int factorial (int num) {
 
 void message (int num1, int num2) {
 
-	float resultF;
-	int resultI;
-
 	printf("El resultado de %d mas %d es igual a %d\n", num1, num2, sum(num1, num2));
 	printf("El resultado de %d menos %d es igual a %d\n", num1, num2, substrac(num1, num2));
 	printf("El resultado de %d multiplicado %d es igual a %d\n", num1, num2, multiply(num1, num2));
 
-	resultF = divide(num1,num2);
-	if (resultF == 0)
+	if (num2 == 0)
 	{
-		printf("Error. No se puede dividir %d por 0", num1);
+		printf("Error. No se puede dividir %d por 0\n", num1);
 	} else {
-		printf("El resultado de %d dividido %d es igual a %.2f\n", num1, num2, resultF);
+		printf("El resultado de %d dividido %d es igual a %.2f\n", num1, num2, divide(num1, num2));
 	}
 
-	resultI = factorial(num1);
-	if (resultI == 0)
+	if (num1 < 0)
 	{
 		printf("Error. No se puede calcular el factorial de un numero negativo (%d)\n", num1);
 	}
 	else
 	{
-		printf("El factorial de %d es %d\n", num1, resultI);
+		printf("El factorial de %d es %d\n", num1, factorial(num1));
 	}
 
-	resultI = factorial(num2);
-	if (resultI == 0)
+	if (num2 < 0)
 	{
 		printf("Error. No se puede calcular el factorial de un numero negativo (%d)\n", num2);
 	}
 	else
 	{
-		printf("El factorial de %d es %d\n", num2, resultI);
+		printf("El factorial de %d es %d\n", num2, factorial(num2));
 	}
+
 	printf("\nLos operadores se han reiniciado.\n\n");
 }
+

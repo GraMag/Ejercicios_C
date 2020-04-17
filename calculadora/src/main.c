@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 #include "calculator.h"
 
 int main(void) {
@@ -21,11 +20,25 @@ int main(void) {
 		// Menu
 		printf("\n--- Menu --- \n\n");
 		printf("Por favor, seleccione una opcion:\n");
-		printf("1- Ingrese el primer operando.\n");
-		printf("2- Ingrese el segundo operando.\n");
+		if (num1ready == 0)
+		{
+			printf("1- Ingrese el primer operando. (A = X) \n");
+		}
+		else
+		{
+			printf("1- Ingrese el primer operando. (A = %d) \n", num1);
+		}
+		if (num2ready == 0)
+		{
+			printf("2- Ingrese el segundo operando. (B = Y) \n");
+		}
+		else
+		{
+			printf("2- Ingrese el segundo operando. (B = %d) \n", num2);
+		}
 		printf("3- Calcular todas las operaciones.\n");
 		printf("4- Informar resultados.\n");
-		printf("5- Salir.\n\n");
+		printf("5- Salir.\n");
 
 		fflush(stdin);
 
@@ -33,12 +46,20 @@ int main(void) {
 
 		switch (option) {
 			case 1:
-				num1 = addNum("Ingrese un numero", "Valor invalido. Ingrese un numero");
-				num1ready++;
+				if (num1ready == 0) {
+					num1 = addNum("Ingrese un numero", "Valor invalido. Ingrese un numero");
+					num1ready++;
+				} else {
+					printf("Ya se ha ingresado el numero %d", num1);
+				}
 				break;
 			case 2:
-				num2 = addNum("Ingrese otro numero", "Valor invalido. Ingrese un numero");
-				num2ready++;
+				if (num2ready == 0) {
+					num2 = addNum("Ingrese un numero", "Valor invalido. Ingrese un numero");
+					num2ready++;
+				} else {
+					printf("Ya se ha ingresado el numero %d", num2);
+				}
 				break;
 			case 3:
 				if (num1ready == 0 && num2ready == 0)
@@ -94,10 +115,9 @@ int main(void) {
 		}
 
 		// Evita que el mensaje se borre antes de que el usuario lo vea
-		if (option == 3 || option == 4)
+		if (option != 5)
 		{
-			printf("Presione una tecla para continuar.\n\n");
-			getch();
+			system("pause");
 		}
 	} while (option != 5);
 
